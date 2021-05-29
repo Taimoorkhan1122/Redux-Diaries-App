@@ -5,8 +5,8 @@ import { RootState } from '../rootReducer';
 
 import './App.css';
 
-const Auth = lazy(() => import('../features/auth'))
-const Home = lazy(() => import('../features/home/Home'))
+const Auth = lazy(() => import('../features/auth/Auth'))
+const Home = lazy(() => import('../features/Home/Home'))
 
 
 const App: FC = () => {
