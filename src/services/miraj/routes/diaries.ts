@@ -101,7 +101,7 @@ export const getEntries = (schema:any, req: Request): {entries: Entry[]} | Respo
 }
 
 // UPDATE ENTRIES
-export const updateEntries = (schema: any, req: Request): Entry | Response => {
+export const updateEntry = (schema: any, req: Request): Entry | Response => {
     try {
         const entry = schema.entries.find(req.params.id);
         const data = JSON.parse(req.requestBody) as Partial<Entry>;
