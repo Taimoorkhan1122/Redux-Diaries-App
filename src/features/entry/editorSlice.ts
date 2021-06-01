@@ -23,11 +23,11 @@ const editor = createSlice({
     setCurrentlyEditing(state, { payload }: PayloadAction<Entry | null>) {
       state.currentlyEditing = payload;
     },
-    setActiveDiary(state, { payload }: PayloadAction<string>) {
+    setActiveDiaryId(state, { payload }: PayloadAction<string>) {
         state.activeDiaryId = payload;
     },
   },    
 });
 
-export const {setCanEdit, setCurrentlyEditing, setActiveDiary} = editor.actions;
+export const { setCanEdit, setCurrentlyEditing, setActiveDiaryId } = editor.actions;
 export default editor.reducer;
