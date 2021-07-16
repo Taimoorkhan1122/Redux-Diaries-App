@@ -19,6 +19,8 @@ const diaries = createSlice({
         // find index of diary we received in payload
         const diaryIndex = state.findIndex(diary => diary.id === id);
         (diaryIndex !== -1) && state.splice(diaryIndex, 1, payload);
+        console.log(payload);
+        
     },
   },
 });

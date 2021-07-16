@@ -18,7 +18,7 @@ const Editor: FC = () => {
     activeDiaryId,
   } = useSelector((state: RootState) => state.editor);
   const [editedEntry, setEditedEntry] = useState(entry);
-  const disptach = useStoreDispatch();
+  const dispatch = useStoreDispatch();
 
   const saveEntry = async () => {
     if (activeDiaryId === null) {
@@ -33,19 +33,19 @@ const Editor: FC = () => {
         .then((data) => {
           if (data != null) {
             const { diary, entry: _entry } = data;
-            disptach(setCurrentlyEditing(_entry));
-            disptach(updateDiary(diary));
+            dispatch(setCurrentlyEditing(_entry));
+            dispatch(updateDiary(diary));
           }
         });
     } else {
       http.put<Entry, Entry>(`/diaries/entry/${entry.id}`, editedEntry).then((_entry) => {
         if (_entry != null) {
-          disptach(setCurrentlyEditing(_entry));
-          disptach(updateEntry(_entry));
+          dispatch(setCurrentlyEditing(_entry));
+          dispatch(updateEntry(_entry));
         }
       });
     }
-    disptach(setCanEdit(false));
+    dispatch(setCanEdit(false));
   };
 
   useEffect(() => setEditedEntry(entry), [entry]);
@@ -69,7 +69,7 @@ const Editor: FC = () => {
               onClick={(e) => {
                 e.preventDefault();
                 if (entry != null) {
-                  disptach(setCanEdit(true));
+                  dispatch(setCanEdit(true));
                 }
               }}
               style={{ marginLeft: "0.4em" }}>
@@ -103,7 +103,7 @@ const Editor: FC = () => {
           <textarea
             disabled={!canEdit}
             placeholder="Supports Markdown"
-            value={entry?.content}
+            value={editedEntry?.content ?? ""}
             onChange={(e) => {
               if (editedEntry) {
                 setEditedEntry({
@@ -116,7 +116,11 @@ const Editor: FC = () => {
                   content: e.target.value,
                 });
               }
-              console.log("Firing onChange -->", e.target.value, entry?.content);
+              console.log(
+                "Firing onChange -->",
+                e.target.value,
+                entry?.content
+              );
             }}
           />
           <button onClick={saveEntry} disabled={!canEdit}>

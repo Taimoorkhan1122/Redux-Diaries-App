@@ -70,7 +70,7 @@ const Diaries: FC = () => {
         
         if(result?.value) {
             const { value } = result;
-            console.log(value, result);
+
             const { diary, user: _user} = await http.post<Partial<Diary>, {diary: Diary, user: User}>('/diaries/', {
                 title: value[0],
                 type: value[1],
